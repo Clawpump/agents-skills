@@ -1,0 +1,7 @@
+{
+  "name": "Rug Check",
+  "description": "Solana token safety diligence: mint/freeze authority, LP lock/burn, top-holder concentration, and RugCheck score. Run before swapping or launching",
+  "author": "clawpump",
+  "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
+  "version": "1.0.0"
+}

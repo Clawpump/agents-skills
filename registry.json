@@ -83,6 +83,30 @@
       "author": "clawhunter",
       "tags": ["clawhunter", "content", "voice", "image", "video", "research", "x402"],
       "path": "skills/clawhunter-content-studio"
+    },
+    {
+      "slug": "clawpump",
+      "name": "ClawPump",
+      "description": "Create and chat with agents, trade, perps, DCA, lend, launch tokens, marketplace, predictions, gift cards, and agent email on Solana via the ClawPump MCP",
+      "author": "clawpump",
+      "tags": ["clawpump", "solana", "defi", "trading", "token-launch", "mcp"],
+      "path": "skills/clawpump"
+    },
+    {
+      "slug": "dex-pools",
+      "name": "DEX Pools",
+      "description": "Solana DEX liquidity, OHLCV candles, and venue discovery for any token or pool via GeckoTerminal (keyless)",
+      "author": "clawpump",
+      "tags": ["solana", "dex", "liquidity", "ohlcv", "trading", "defi"],
+      "path": "skills/dex-pools"
+    },
+    {
+      "slug": "rug-check",
+      "name": "Rug Check",
+      "description": "Solana token safety diligence: mint/freeze authority, LP lock/burn, top-holder concentration, and RugCheck score. Run before swapping or launching",
+      "author": "clawpump",
+      "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
+      "path": "skills/rug-check"
     }
   ]
 }

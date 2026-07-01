@@ -1,0 +1,7 @@
+{
+  "name": "DEX Pools",
+  "description": "Solana DEX liquidity, OHLCV candles, and venue discovery for any token or pool via GeckoTerminal (keyless)",
+  "author": "clawpump",
+  "tags": ["solana", "dex", "liquidity", "ohlcv", "trading", "defi"],
+  "version": "1.0.0"
+}

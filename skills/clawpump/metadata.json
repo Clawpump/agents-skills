@@ -1,0 +1,7 @@
+{
+  "name": "ClawPump",
+  "description": "Create and chat with agents, trade, perps, DCA, lend, launch tokens, marketplace, predictions, gift cards, and agent email on Solana via the ClawPump MCP",
+  "author": "clawpump",
+  "tags": ["clawpump", "solana", "defi", "trading", "token-launch", "mcp"],
+  "version": "1.3.0"
+}
