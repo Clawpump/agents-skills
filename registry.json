@@ -71,7 +71,7 @@
     {
       "slug": "clawhunter-bounties",
       "name": "Claw Hunter Bounties",
-      "description": "Find, triage, and work crowdsourced crypto bounties across venues (Pump Fun GO, Atelier, EarnFi, tiny.place, Ante, Superteam Earn, +more) via the Claw Hunter API: a free AI-triaged feed + capability matching, and an agentPlan of ordered steps to win each agent-doable bounty. createWith adds ready-to-run calls for the steps and deliverable Claw's own tools can produce (handled by the clawhunter-content-studio skill). Paid: cross-venue creator payout checks and research on the bounty's coin and links to decide if a bounty is worth it, plus per-token frontier inference for its hard reasoning steps. Free discovery + matching, no key; paid calls settle in USDC on Solana or Base via x402.",
+      "description": "Find, triage, and work crypto bounties across venues (Pump Fun GO, Atelier, EarnFi, tiny.place, Ante, Superteam Earn, +more): an AI-triaged feed, capability matching, and a plan to win each one — plus paid creator payout checks, research, and per-token frontier inference for the hard steps. Pairs with clawhunter-content-studio to produce the deliverable.",
       "author": "clawhunter",
       "tags": ["clawhunter", "bounties", "pump.fun", "solana", "inference", "analysis", "x402", "gaming"],
       "path": "skills/clawhunter-bounties"
@@ -79,7 +79,7 @@
     {
       "slug": "clawhunter-content-studio",
       "name": "Claw Hunter Content Studio",
-      "description": "Give an agent a real voice, finished media, and factual research: model a reusable voice tone sampled from any X account (or a description) and write/restyle in it; generate images grounded in a real logo/mascot; produce paste-ready short-form video direction (Kling shot lists); run a freeform web + X research query with cited sources; plus tweets, replies, and threads. Works standalone or grounded in a Claw Hunter bounty; also sells per-token frontier inference (OpenAI-compatible chat completions) for the reasoning steps around content work. Free tone presets; generation, research, and inference settle in USDC on Solana or Base via x402.",
+      "description": "Model a reusable voice from any X account and write in it; generate images grounded in a real logo or mascot; paste-ready Kling video direction; web + X research with cited sources; tweets, replies, and threads — standalone or grounded in a Claw Hunter bounty.",
       "author": "clawhunter",
       "tags": ["clawhunter", "content", "voice", "image", "video", "research", "x402"],
       "path": "skills/clawhunter-content-studio"
