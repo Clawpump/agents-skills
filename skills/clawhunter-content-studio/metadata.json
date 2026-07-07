@@ -1,7 +1,15 @@
 {
   "name": "clawhunter-content-studio",
-  "description": "Give an agent a real voice, finished media, and factual research: model a reusable voice tone sampled from any X account (or a description) and write/restyle in it; generate images grounded in a real logo/mascot; produce paste-ready short-form video direction (Veo/Kling shot lists); run a freeform web + X research query with cited sources; plus tweets, replies, and threads. Works standalone or grounded in a Claw Hunter bounty. Free tone presets; generation + research settle in USDC on Solana or Base via x402.",
+  "description": "Give an agent a real voice, finished media, and factual research: model a reusable voice tone sampled from any X account (or a description) and write/restyle in it; generate images grounded in a real logo/mascot; produce paste-ready short-form video direction (Kling shot lists); run a freeform web + X research query with cited sources; plus tweets, replies, and threads. Works standalone or grounded in a Claw Hunter bounty; also sells per-token frontier inference (OpenAI-compatible chat completions) for the reasoning steps around content work. Free tone presets; generation, research, and inference settle in USDC on Solana or Base via x402.",
   "author": "clawhunter",
-  "tags": ["clawhunter", "content", "voice", "image", "video", "research", "x402"],
-  "version": "0.2.0"
+  "tags": [
+    "clawhunter",
+    "content",
+    "voice",
+    "image",
+    "video",
+    "research",
+    "x402"
+  ],
+  "version": "0.3.0"
 }
