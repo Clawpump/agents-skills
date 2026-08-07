@@ -1,0 +1,74 @@
+{
+  "id": "agentfx-trading-skill",
+  "name": "AgentFX Trading Skill",
+  "version": "2.6.0",
+  "description": "Enables autonomous market data tracking, automated quote generation, and execution for pump.fun tokens on Solana.",
+  "author": "AgentFX Protocol",
+  "base_url": "https://agentfx.fun/api/v1",
+  "authentication": {
+    "type": "x402",
+    "platform_wallet": "ArQi1jCnvFQsF2sVhGJMwx9tVedDYeGZJDWG9pN12MpX",
+    "cost_sol": 0.01,
+    "duration_days": 90
+  },
+  "actions": [
+    {
+      "name": "get_market_data",
+      "description": "Fetch real-time market metrics for a specific pump.fun token mint address.",
+      "path": "/market/data",
+      "method": "GET",
+      "parameters": {
+        "mint": {
+          "type": "string",
+          "required": true,
+          "description": "The Solana mint address of the token."
+        }
+      }
+    },
+    {
+      "name": "create_bot_quote",
+      "description": "Build an unsigned transaction payload for buying or selling a token.",
+      "path": "/bot/quote",
+      "method": "POST",
+      "request_body": {
+        "wallet": { "type": "string", "required": true },
+        "side": { "type": "string", "enum": ["buy", "sell"], "required": true },
+        "mint": { "type": "string", "required": true },
+        "amount": { "type": "string", "required": true }
+      }
+    },
+    {
+      "name": "start_bot_loop",
+      "description": "Initialize the automated trading loop with configured strategy thresholds.",
+      "path": "/bot/start",
+      "method": "POST",
+      "request_body": {
+        "wallet": { "type": "string", "required": true },
+        "strategy": {
+          "type": "object",
+          "properties": {
+            "entryThreshold": { "type": "number", "default": 0.05 },
+            "exitThreshold": { "type": "number", "default": 0.1 },
+            "maxPositionUsd": { "type": "number", "default": 100 },
+            "takeProfitPct": { "type": "number", "default": 0.2 },
+            "stopLossPct": { "type": "number", "default": 0.1 }
+          }
+        }
+      }
+    },
+    {
+      "name": "stop_bot_loop",
+      "description": "Halts the active trading loop execution immediately.",
+      "path": "/bot/stop",
+      "method": "POST"
+    }
+  ],
+  "streams": {
+    "websocket_url": "wss://pumpportal.fun/api/data",
+    "subscriptions": [
+      "subscribeNewToken",
+      "subscribeTokenTrade",
+      "subscribeAccountTrade"
+    ]
+  }
+}

@@ -1,0 +1,28 @@
+# AgentFX Trading Skill Documentation
+
+This skill enables autonomous ClawPump agents to interact with the AgentFX API (v2.6) for market data retrieval, automated transaction building, and pump.fun token trading execution over the Solana network.
+
+## Protocol Information
+- **Base URL:** `https://agentfx.fun/api/v1`
+- **Protocol:** OpenAPI 3.1
+- **Version:** v2.6
+- **Last Updated:** 2025-07-01
+
+---
+
+## 1. Authentication (x402 Flow)
+ClawPump agents strictly utilize the **x402 Payment** method for authentication. Other methods (like SIWS) are unsupported.
+
+### Flow Step-by-Step
+1. **Transfer:** Send `0.01 SOL` to the Platform Wallet: `ArQi1jCnvFQsF2sVhGJMwx9tVedDYeGZJDWG9pN12MpX`
+2. **Signature:** Extract the base58 transaction signature.
+3. **Redeem:** Send a `POST` request to `/x402/redeem` to claim a 90-day Bearer token.
+
+### Redeem Endpoint
+- **Endpoint:** `POST /api/v1/x402/redeem`
+- **Request Body (JSON):**
+```json
+{
+  "wallet": "3dUd7P6hNax4u5wp6s2rntTaKQDdnn2o6dG5svH9Vaa5",
+  "signature": "base58_transaction_signature"
+}
