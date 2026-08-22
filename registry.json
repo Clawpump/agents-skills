@@ -6,7 +6,11 @@
       "name": "Meme Token Analyzer",
       "description": "Structured analysis and scoring of meme tokens on Solana with rug pull detection",
       "author": "clawpump",
-      "tags": ["meme", "analysis", "risk"],
+      "tags": [
+        "meme",
+        "analysis",
+        "risk"
+      ],
       "path": "skills/meme-analyzer"
     },
     {
@@ -14,7 +18,11 @@
       "name": "Whale Tracker",
       "description": "Monitor and interpret large wallet movements on Solana",
       "author": "clawpump",
-      "tags": ["analysis", "trading", "defi"],
+      "tags": [
+        "analysis",
+        "trading",
+        "defi"
+      ],
       "path": "skills/whale-tracker"
     },
     {
@@ -22,7 +30,11 @@
       "name": "DCA Strategy",
       "description": "Plan and manage Dollar-Cost Averaging strategies for Solana tokens",
       "author": "clawpump",
-      "tags": ["trading", "defi", "portfolio"],
+      "tags": [
+        "trading",
+        "defi",
+        "portfolio"
+      ],
       "path": "skills/dca-strategy"
     },
     {
@@ -30,7 +42,11 @@
       "name": "Risk Manager",
       "description": "Pre-trade risk assessment with position sizing, concentration, and drawdown checks",
       "author": "clawpump",
-      "tags": ["risk", "trading", "portfolio"],
+      "tags": [
+        "risk",
+        "trading",
+        "portfolio"
+      ],
       "path": "skills/risk-manager"
     },
     {
@@ -38,34 +54,49 @@
       "name": "Alpha Scanner",
       "description": "Scan for early trading opportunities from new launches, volume spikes, and smart money",
       "author": "clawpump",
-      "tags": ["trading", "analysis", "defi"],
+      "tags": [
+        "trading",
+        "analysis",
+        "defi"
+      ],
       "path": "skills/alpha-scanner"
     },
     {
-
       "slug": "survivor-check",
       "name": "Survivor Check",
       "description": "Survival-first token check by SOAG: is it a survivor (age + live LP + two-sided volume) or a trap? Tiers bronze/silver/gold/diamond.",
       "author": "yksanjo",
-      "tags": ["risk", "analysis", "defi"],
+      "tags": [
+        "risk",
+        "analysis",
+        "defi"
+      ],
       "path": "skills/survivor-check"
-
-},
-  {
-
+    },
+    {
       "slug": "straight-talk",
       "name": "Straight Talk",
       "description": "Turn an agent's action or holdings into an honest, no-shill social post: states the read, admits losses, flags traps, never promises price",
       "author": "yksanjo",
-      "tags": ["social", "utility", "risk"],
+      "tags": [
+        "social",
+        "utility",
+        "risk"
+      ],
       "path": "skills/straight-talk"
     },
-{
+    {
       "slug": "laso-finance",
       "name": "Laso Finance Wallet Cards",
       "description": "Order and manage Laso prepaid cards, gift cards, and push-to-card payouts with a ClawPump agent wallet",
       "author": "clawpump",
-      "tags": ["laso", "x402", "wallet", "cards", "payments"],
+      "tags": [
+        "laso",
+        "x402",
+        "wallet",
+        "cards",
+        "payments"
+      ],
       "path": "skills/laso-finance"
     },
     {
@@ -73,7 +104,15 @@
       "name": "Claw Hunter Bounties",
       "description": "Find, triage, and work crypto bounties across venues (Pump Fun GO, tiny.place, EarnFi, Atelier, +more): an AI-triaged feed, capability matching, an agentPlan of steps to win each one, plus cross-venue creator payout checks and research. Pairs with clawhunter-content-studio to produce the deliverable.",
       "author": "clawhunter",
-      "tags": ["clawhunter", "bounties", "pump.fun", "solana", "base", "analysis", "x402"],
+      "tags": [
+        "clawhunter",
+        "bounties",
+        "pump.fun",
+        "solana",
+        "base",
+        "analysis",
+        "x402"
+      ],
       "path": "skills/clawhunter-bounties"
     },
     {
@@ -81,7 +120,15 @@
       "name": "Claw Hunter Content Studio",
       "description": "Model a voice tone from any X account and write in it, generate logo-grounded images, produce Veo/Kling video direction, run freeform web + X research with cited sources, and draft tweets/threads. Standalone or grounded in a Claw Hunter bounty.",
       "author": "clawhunter",
-      "tags": ["clawhunter", "content", "voice", "image", "video", "research", "x402"],
+      "tags": [
+        "clawhunter",
+        "content",
+        "voice",
+        "image",
+        "video",
+        "research",
+        "x402"
+      ],
       "path": "skills/clawhunter-content-studio"
     },
     {
@@ -89,7 +136,14 @@
       "name": "ClawPump",
       "description": "Create and chat with agents, trade, perps, DCA, lend, launch tokens, marketplace, predictions, gift cards, and agent email on Solana via the ClawPump MCP",
       "author": "clawpump",
-      "tags": ["clawpump", "solana", "defi", "trading", "token-launch", "mcp"],
+      "tags": [
+        "clawpump",
+        "solana",
+        "defi",
+        "trading",
+        "token-launch",
+        "mcp"
+      ],
       "path": "skills/clawpump"
     },
     {
@@ -97,7 +151,14 @@
       "name": "DEX Pools",
       "description": "Solana DEX liquidity, OHLCV candles, and venue discovery for any token or pool via GeckoTerminal (keyless)",
       "author": "clawpump",
-      "tags": ["solana", "dex", "liquidity", "ohlcv", "trading", "defi"],
+      "tags": [
+        "solana",
+        "dex",
+        "liquidity",
+        "ohlcv",
+        "trading",
+        "defi"
+      ],
       "path": "skills/dex-pools"
     },
     {
@@ -105,8 +166,27 @@
       "name": "Rug Check",
       "description": "Solana token safety diligence: mint/freeze authority, LP lock/burn, top-holder concentration, and RugCheck score. Run before swapping or launching",
       "author": "clawpump",
-      "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
+      "tags": [
+        "solana",
+        "token-safety",
+        "rug-check",
+        "due-diligence",
+        "defi"
+      ],
       "path": "skills/rug-check"
+    },
+    {
+      "slug": "ansemhub",
+      "name": "AnsemHub",
+      "description": "Live Ansem.io boost signals, coin data, $ANSEM burn score and AnsemHub agent trade signals, read-only from api.ansemhub.com",
+      "author": "NotMcAfee",
+      "tags": [
+        "trading",
+        "analysis",
+        "defi",
+        "meme"
+      ],
+      "path": "skills/ansemhub"
     }
   ]
 }
