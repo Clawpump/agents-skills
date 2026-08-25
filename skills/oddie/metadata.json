@@ -1,0 +1,7 @@
+{
+  "name": "Oddie",
+  "description": "Open a prediction market on Solana from any argument on X, and read the live odds on markets it already holds",
+  "author": "vercettilev",
+  "tags": ["solana", "prediction-markets", "social", "utility"],
+  "version": "1.0.0"
+}
