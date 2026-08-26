@@ -57,7 +57,8 @@ Both are keyless. The fields that matter:
 | `yesPct` | the vault's own odds |
 | `oddsSource` | `vault` when priced, `unpriced` when nothing is staked |
 | `taggedBy` | the handle the creator fee is owed to |
-| `creatorFeeBps` | 300, meaning 3% |
+| `creatorFeeBps` | 200, meaning 2% to the tagger |
+| `protocolFeeBps` | 200, meaning 2% to oddie |
 | `cluster` | which Solana network the vaults live on right now |
 | `onchain.explorer` | the vault, on Solana Explorer |
 
@@ -107,9 +108,17 @@ Stakes go into the market's own vault, a program-derived account. Oddie never
 holds them: the server assembles the transaction and the staker's own wallet
 signs it.
 
-At settlement the pool is split among the winning side, after 3% is taken out
-for whoever tagged the argument. That 3% is claimed with the creator's own
-signature and cannot be redirected to anyone else. Oddie takes nothing.
+At settlement the pool is split among the winning side, after 4% is taken out:
+2% for whoever tagged the argument, 2% for oddie. The tagger's half is claimed
+with their own signature and cannot be redirected to anyone else.
+
+Both rates are stored on the market at creation, not read from a global, so a
+rate change can never reprice a pool people have already staked into. Read them
+off the market rather than assuming today's numbers.
+
+Nothing is taken when nobody backed the winning side. That pool is refunded in
+full, and charging a fee on a refund would bill people for an unpriceable
+question.
 
 If you create a market on behalf of a user, the fee follows the handle in
 `source_url`, not you. Say so when you report back, so nobody expects a payout
