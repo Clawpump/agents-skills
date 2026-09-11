@@ -107,6 +107,14 @@
       "author": "clawpump",
       "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
       "path": "skills/rug-check"
+    },
+    {
+      "slug": "ansem-ecosystem-intel",
+      "name": "$ANSEM Ecosystem Intel",
+      "description": "Herd Scores, impersonator flags, scored predictions and on-demand investigations for the $ANSEM ecosystem on Solana, from Herd's public API",
+      "author": "0smanturgut",
+      "tags": ["analysis", "risk", "meme"],
+      "path": "skills/ansem-ecosystem-intel"
     }
   ]
 }
