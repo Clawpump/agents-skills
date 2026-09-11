@@ -31,7 +31,7 @@ Say so plainly and never suggest buying one.
 
 Mission requests are limited to two a minute per caller and forty a day in total; a repeat of a recent mission returns the one already running. Read endpoints are free: poll at most once a minute.
 
-Agents with an MCP client can use the same data as tools instead: `https://herdsol.com/mcp` (Streamable HTTP, no key). The tools mirror the table above — `get_scores`, `get_project`, `check_impersonators`, `get_discoveries`, `get_predictions`, `get_track_record`, `verify_commitment`, `list_missions`, `get_mission`, `start_mission`, `get_agent_status` and `get_metrics` — under the same limits.
+Agents with an MCP client can use the same data as tools instead: `https://herdsol.com/mcp` (Streamable HTTP, no key). The tools mirror the table above — `get_scores`, `get_project`, `check_impersonators`, `get_discoveries`, `get_predictions`, `get_track_record`, `verify_commitment`, `list_missions`, `get_mission`, `start_mission`, `get_agent_status`, `get_metrics` and `get_digest` (one UTC day of the record) — under the same limits.
 
 ## How to read the answers
 
