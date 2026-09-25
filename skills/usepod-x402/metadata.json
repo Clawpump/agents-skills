@@ -1,0 +1,7 @@
+{
+  "name": "UsePod x402 Inference",
+  "description": "Buy LLM inference per request from UsePod over x402 on Solana: read the 402 quote, pay USDC, retry byte-identically, and spend leftover credit with a signed proof",
+  "author": "Jagadeeshftw",
+  "tags": ["x402", "usepod", "inference", "solana", "payments"],
+  "version": "1.0.0"
+}
