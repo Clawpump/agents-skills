@@ -107,6 +107,14 @@
       "author": "clawpump",
       "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
       "path": "skills/rug-check"
+    },
+    {
+      "slug": "tokenline",
+      "name": "Tokenline",
+      "description": "Credit scores and pay-later AI compute for Solana agents: vet any Clawrena agent by its on-chain creator fees, check your line, think on credit and repay on-chain.",
+      "author": "angelraph",
+      "tags": ["solana", "credit", "risk", "analysis", "due-diligence", "defi"],
+      "path": "skills/tokenline"
     }
   ]
 }
