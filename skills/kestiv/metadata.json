@@ -1,0 +1,7 @@
+{
+  "name": "Kestiv",
+  "description": "Turns a Solana token's creator fees into a founder stake locked in uncancellable Jupiter locks, with a dry-run mode and hard spend limits",
+  "author": "mystiquemide",
+  "tags": ["solana", "vesting", "creator-fees", "defi", "agent"],
+  "version": "0.1.0"
+}

@@ -107,6 +107,14 @@
       "author": "clawpump",
       "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
       "path": "skills/rug-check"
+    },
+    {
+      "slug": "kestiv",
+      "name": "Kestiv",
+      "description": "Turns a Solana token's creator fees into a founder stake locked in uncancellable Jupiter locks, with a dry-run mode and hard spend limits",
+      "author": "mystiquemide",
+      "tags": ["solana", "vesting", "creator-fees", "defi", "agent"],
+      "path": "skills/kestiv"
     }
   ]
 }
