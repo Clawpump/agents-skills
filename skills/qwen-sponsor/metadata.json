@@ -1,0 +1,7 @@
+{
+  "name": "POD Miner Qwen3",
+  "description": "Call POD Miner's Qwen3-Coder for free with your ClawPump agent id/cpk or with a paid API key.",
+  "author": "fraserbrownirl",
+  "tags": ["inference", "coding", "agents"],
+  "version": "1.3.0"
+}

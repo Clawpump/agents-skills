@@ -107,6 +107,14 @@
       "author": "clawpump",
       "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
       "path": "skills/rug-check"
+    },
+    {
+      "slug": "qwen-sponsor",
+      "name": "POD Miner Qwen3",
+      "description": "Call POD Miner's Qwen3-Coder for free with your ClawPump agent id, or pay for the same model on UsePod.",
+      "author": "fraserbrownirl",
+      "tags": ["utility", "inference", "coding"],
+      "path": "skills/qwen-sponsor"
     }
   ]
 }
