@@ -1,6 +1,6 @@
 ---
 name: pumpdata
-description: "Before an alpha call or a buy on pump.fun: the base rate for the market-cap band (how often coins like this one paid), what the buyers have been (winner, bot, supply seller, new), the deployer's record with how similar launches went, and an honest replay of a pick list with fees and fills. Every PumpSwap trade, ever. Read-only; paid per call in USDC over x402, from $0.005; yesterday's base rates free."
+description: "Before an alpha call or a buy on pump.fun: the base rate for the market-cap band (how often coins like this one paid), what the buyers have been (winner, bot, supply seller, new), the deployer's record with how similar launches went, and an honest replay of a pick list with fees and fills. Every pump.fun trade, ever. Read-only; paid per call in USDC over x402, from $0.005; yesterday's base rates free."
 version: 1.1.0
 author: pumpdatafun
 tags: [solana, pump.fun, base-rate, wallets, deployer, replay, backtest, x402, mcp, data, risk]
@@ -17,9 +17,9 @@ metadata:
 
 # pumpdata — base rates, wallet records, launch records, replay
 
-You can read pumpdata.fun, a warehouse of every PumpSwap trade ever and every pump.fun bonding-curve trade since
-March 2025, read from the chain's own ledger with the dead coins kept. `rug-check` says whether a coin is safe to
-touch; `survivor-check` says whether it has lasted; this says whether coins like it have ever paid, what its buyers
+You can read pumpdata.fun, a warehouse of every pump.fun trade ever, bonding curve and PumpSwap, since pump.fun's first day,
+read from the chain's own ledger with the dead coins kept. `rug-check` reads a coin's contract;
+`survivor-check` says whether it has lasted; this says whether coins like it have ever paid, what its buyers
 have been, what its deployer has done, and what a list of picks would really have made. Every call is a read, paid
 per call in USDC over x402 with your own wallet, from half a cent. Nothing here signs a trade.
 
@@ -50,11 +50,11 @@ python: https://github.com/pumpdatafun/pumpdata-examples.
 | `GET https://pumpdata.fun/baserate?band=15k-28k&from=<iso>&to=<iso>&venue=any` | a market-cap band (edges snap to 5k, 10k, 15k, 20k, 28k, 40k, 60k, 100k, 250k, 1000k), a window of up to 31 days, `venue` any, curve or pool | `crossed` (coins with a crossing in the window, see Definitions), `reached` {2x, 5x, 10x, 20x} as shares within 3 h, `median_peak`, the window used |
 | `POST https://pumpdata.fun/wallets` `{"addresses": [...], "mint": "<optional>"}` | up to 50 wallets, optionally the coin they are buying | per wallet: `class` (winner, bot, supply_seller, new, none), `pnl_sol`, `put_in`, `took_out`, `coins`, `first_seen`. The labels are rules, not opinions |
 | `GET https://pumpdata.fun/launch/{mint}` | a mint | the deployer's record (launches, graduations, best run, gaps between launches), the bundle at creation, the insiders' share of supply, curve progress, and how launches that looked the same at this age went over the next 24 h |
-| `POST https://pumpdata.fun/replay` `{"picks": [{"mint", "at", "size_sol"}, ...]}` | up to 500 picks, graduates only | `202` with a job id; poll `GET /replay/{id}` (free) until `state` is `done` (or `failed`): what the picks made pick by pick and in sum, filled at the pool as it stood 3 s after the mark, pump.fun's fee by tier, a fixed 145,000 lamports to land each side (entry and exit), graduates that died in the sum; a pick still on the bonding curve fills nothing and comes back `skipped_not_covered` |
+| `POST https://pumpdata.fun/replay` `{"picks": [{"mint", "at", "size_sol"}, ...]}` | up to 500 picks, graduates only | `202` with a job id; poll `GET /replay/{id}` (free) until `state` is `done` (or `failed`): what the picks made pick by pick and in sum, filled at the PumpSwap pool as it stood 3 s after the mark, pump.fun's fee by tier, a fixed 145,000 lamports to land each side (entry and exit), graduates that died in the sum; a pick still on the bonding curve, or outside the archive, fills nothing and is counted in `skipped_not_covered` |
 
 Definitions: a *crossing* is a coin's first trade with a market cap inside the band (a coin that jumps over the
 band in one trade has none); the *peak* is the highest market cap, curve or pool, in the 3 h after; a window ending
-under 3 h ago is cut at 3 h ago; USD is at the SOL price of the trade's hour. Every answer carries `X-Data-From`
+under 3 h before the data's as-of (`X-Data-As-Of`) is cut there; USD is at the SOL price of the trade's hour. Every answer carries `X-Data-From`
 (where the data begins) and `X-Data-As-Of` (the build it comes from).
 
 ## How to pay
@@ -74,10 +74,10 @@ again with the `PAYMENT-SIGNATURE` value as `payment`.
 | `402` | the offer, or `payment_invalid` / `payment_settle_failed` (the payment was refused; nothing settled) | pay and retry (your x402 tool does it); on a refusal read `reason` first |
 | `200` | the answer; nothing more to pay | quote the band, the window and `X-Data-As-Of` |
 | `202` (replay) | queued and paid, `id` in the body | poll `GET /replay/{id}` (free) every few seconds until `state` is `done` (the answer is in `result`) or `failed` (after one free retry; `error` says why) |
-| `404` `not_found` | the window ends before the data begins (`X-Data-From`), or (`/launch`) a mint it does not know yet | nothing was charged; ask a later window, or check the mint (a fresh launch may not be built yet; retry later) |
+| `404` `not_found` | the window ends before the data begins (`X-Data-From`), or (`/launch`) a mint it does not know yet; a window inside the data with no crossings is not a 404 but a charged `200` | nothing was charged; ask a later window, or check the mint (a fresh launch may not be built yet; retry later) |
 | `400` | the request is malformed (band, window, body), or the window is over 31 days; nothing was charged | fix it (`error` or `detail` says what), or split the window into months |
 | `429` | too many calls from one address | wait for `retry-after` (60 s) |
-| `upstream_failed`, `503` `upstream_unreachable` | the backend failed; nothing was charged | on a 400 fix the request; if the `detail` text contains `query_timeout`, narrow the window; else retry later |
+| `upstream_failed` (the backend's status passed through, `502` for a backend `403`), or `503` `upstream_unreachable` | the backend failed or could not be reached; nothing was charged | on a 400 fix the request; if the `detail` text contains `query_timeout`, narrow the window; else retry later |
 | `503` `payment_settle_uncertain` | the payment may or may not have settled; no receipt | do not pay again blindly |
 | `503` `replay_queue_unavailable` on `POST /replay` | paid but not queued; the receipt is in `payment` and `PAYMENT-RESPONSE` | do not pay again; keep the receipt, the run is owed (on a poll it means retry shortly) |
 
