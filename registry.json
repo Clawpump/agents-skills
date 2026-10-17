@@ -107,6 +107,14 @@
       "author": "clawpump",
       "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
       "path": "skills/rug-check"
+    },
+    {
+      "slug": "zooai-creator-check",
+      "name": "ZOOAI Creator Check",
+      "description": "Before buying a fresh pump.fun token: did its creator already dump, bundle the launch block, or rug launch after launch? On-chain, free, no key",
+      "author": "0xNickdev",
+      "tags": ["risk", "rug-check", "pump.fun", "solana", "sniping"],
+      "path": "skills/zooai-creator-check"
     }
   ]
 }
