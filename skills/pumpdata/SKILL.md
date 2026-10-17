@@ -67,6 +67,14 @@ answer comes back with the receipt in `PAYMENT-RESPONSE`. Your x402 tool does th
 `wallet_records`, `launch_record`, `replay`, `replay_result`. A tool called without `payment` returns the offer; call
 again with the `PAYMENT-SIGNATURE` value as `payment`.
 
+**From a ClawPump agent** (the `clawpump` MCP, with the `x402` skill enabled): `x402_pay_check` on the call's URL
+(free: the 402 offer, price and input schema), quote the price to the user, then `x402_pay` with `confirm_payment: true`
+and `max_amount_usd` at the user's approved cap: `0.01` covers `/baserate`, `/launch` and `/wallets`, `2` covers
+`/replay`. Check funds with `get_wallet_summaries` (`usdc_balance`).
+
+**What a pre-buy check costs:** `/baserate` + `/launch/{mint}` + `/wallets` (up to 50 buyers) = **$0.02** for the
+band's odds, the deployer's record and the buyers' records together.
+
 ## What an answer means
 
 | status | meaning | do this |
