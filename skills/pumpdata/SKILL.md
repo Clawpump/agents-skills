@@ -50,7 +50,7 @@ python: https://github.com/pumpdatafun/pumpdata-examples.
 | `GET https://pumpdata.fun/baserate?band=15k-28k&from=<iso>&to=<iso>&venue=any` | a market-cap band (edges snap to 5k, 10k, 15k, 20k, 28k, 40k, 60k, 100k, 250k, 1000k), a window of up to 31 days, `venue` any, curve or pool | `crossed` (coins with a crossing in the window, see Definitions), `reached` {2x, 5x, 10x, 20x} as shares within 3 h, `median_peak`, the window used |
 | `POST https://pumpdata.fun/wallets` `{"addresses": [...], "mint": "<optional>"}` | up to 50 wallets, optionally the coin they are buying | per wallet: `class` (winner, bot, supply_seller, new, none), `pnl_sol`, `put_in`, `took_out`, `coins`, `first_seen`. The labels are rules, not opinions |
 | `GET https://pumpdata.fun/launch/{mint}` | a mint | the deployer's record (launches, graduations, best run, gaps between launches), the bundle at creation, the insiders' share of supply, curve progress, and how launches that looked the same at this age went over the next 24 h |
-| `POST https://pumpdata.fun/replay` `{"picks": [{"mint", "at", "size_sol"}, ...]}` | up to 500 picks, graduates only | `202` with a job id; poll `GET /replay/{id}` until `done`: what the picks made pick by pick and in sum, filled at the pool as it stood 3 s after the mark, pump.fun's fee by tier, 145,000 lamports a trade fixed, graduates that died in the sum; a pick still on the bonding curve fills nothing and comes back `skipped_not_covered` |
+| `POST https://pumpdata.fun/replay` `{"picks": [{"mint", "at", "size_sol"}, ...]}` | up to 500 picks, graduates only | `202` with a job id; poll `GET /replay/{id}` (free) until `state` is `done` (or `failed`): what the picks made pick by pick and in sum, filled at the pool as it stood 3 s after the mark, pump.fun's fee by tier, a fixed 145,000 lamports to land each side (entry and exit), graduates that died in the sum; a pick still on the bonding curve fills nothing and comes back `skipped_not_covered` |
 
 Definitions: a *crossing* is a coin's first trade with a market cap inside the band (a coin that jumps over the
 band in one trade has none); the *peak* is the highest market cap, curve or pool, in the 3 h after; a window ending
@@ -71,13 +71,15 @@ again with the `PAYMENT-SIGNATURE` value as `payment`.
 
 | status | meaning | do this |
 |---|---|---|
-| `402` | the offer | pay and retry (your x402 tool does it) |
+| `402` | the offer, or `payment_invalid` / `payment_settle_failed` (the payment was refused; nothing settled) | pay and retry (your x402 tool does it); on a refusal read `reason` first |
 | `200` | the answer; nothing more to pay | quote the band, the window and `X-Data-As-Of` |
-| `202` (replay) | queued, `id` in the body | poll `GET /replay/{id}` every few seconds until `status` is `done` |
-| `404` `not_found` | nothing in that window | nothing was charged; ask a later window |
-| `400` | the band or the window is malformed, or the window is over 31 days | fix it, or split the window into months |
-| `429` | too many calls from one address | wait a few seconds |
-| `503` `query_timeout` | the window took too long | narrow it and ask again |
+| `202` (replay) | queued and paid, `id` in the body | poll `GET /replay/{id}` (free) every few seconds until `state` is `done` (the answer is in `result`) or `failed` (after one free retry; `error` says why) |
+| `404` `not_found` | the window ends before the data begins (`X-Data-From`), or (`/launch`) a mint it does not know yet | nothing was charged; ask a later window, or check the mint (a fresh launch may not be built yet; retry later) |
+| `400` | the request is malformed (band, window, body), or the window is over 31 days; nothing was charged | fix it (`error` or `detail` says what), or split the window into months |
+| `429` | too many calls from one address | wait for `retry-after` (60 s) |
+| `upstream_failed`, `503` `upstream_unreachable` | the backend failed; nothing was charged | on a 400 fix the request; if the `detail` text contains `query_timeout`, narrow the window; else retry later |
+| `503` `payment_settle_uncertain` | the payment may or may not have settled; no receipt | do not pay again blindly |
+| `503` `replay_queue_unavailable` on `POST /replay` | paid but not queued; the receipt is in `payment` and `PAYMENT-RESPONSE` | do not pay again; keep the receipt, the run is owed (on a poll it means retry shortly) |
 
 ## Rules
 
