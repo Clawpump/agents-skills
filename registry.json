@@ -107,6 +107,14 @@
       "author": "clawpump",
       "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
       "path": "skills/rug-check"
+    },
+    {
+      "slug": "herd-desk-signals",
+      "name": "Herd Desk Signals",
+      "description": "Readings before a trade: what Herd's own desk holds and why, every ClawPump launch read within the hour with the twelve-rule checklist, and any mint's page with its history and the Oracle's calls, from Herd's public API",
+      "author": "0smanturgut",
+      "tags": ["trading", "analysis", "risk"],
+      "path": "skills/herd-desk-signals"
     }
   ]
 }
