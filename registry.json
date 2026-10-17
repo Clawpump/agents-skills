@@ -107,6 +107,14 @@
       "author": "clawpump",
       "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
       "path": "skills/rug-check"
+    },
+    {
+      "slug": "solenrich",
+      "name": "SolEnrich",
+      "description": "Solana onchain intelligence pay-per-call over x402: token due diligence verdicts, wallet risk, smart-money flow, memecoin entry/exit signals, cross-venue perps funding, StonkFun reward-coin gems",
+      "author": "0xSardius",
+      "tags": ["analysis", "risk", "trading", "defi", "meme"],
+      "path": "skills/solenrich"
     }
   ]
 }
