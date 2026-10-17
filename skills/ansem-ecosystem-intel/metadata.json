@@ -1,0 +1,11 @@
+{
+  "name": "$ANSEM Ecosystem Intel",
+  "description": "Herd Scores, impersonator flags, scored predictions and on-demand investigations for the $ANSEM ecosystem on Solana, from Herd's public API",
+  "author": "0smanturgut",
+  "tags": [
+    "analysis",
+    "risk",
+    "meme"
+  ],
+  "version": "1.0.0"
+}
