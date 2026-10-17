@@ -1,0 +1,12 @@
+{
+  "name": "AnsemHub",
+  "description": "Live Ansem.io boost signals, coin data, $ANSEM burn score and AnsemHub agent trade signals, read-only from api.ansemhub.com",
+  "author": "NotMcAfee",
+  "tags": [
+    "trading",
+    "analysis",
+    "defi",
+    "meme"
+  ],
+  "version": "1.0.0"
+}
