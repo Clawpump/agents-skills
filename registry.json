@@ -107,6 +107,14 @@
       "author": "clawpump",
       "tags": ["solana", "token-safety", "rug-check", "due-diligence", "defi"],
       "path": "skills/rug-check"
+    },
+    {
+      "slug": "pumpdata",
+      "name": "pumpdata",
+      "description": "Before an alpha call or a buy on pump.fun: the base rate for the band (how often coins like this one paid), what the buyers have been, the deployer's record with how similar launches went, and an honest replay of a pick list with fees and fills, from every PumpSwap trade ever. Yesterday's base rates free; the rest paid per call in USDC over x402, no key, no account.",
+      "author": "pumpdatafun",
+      "tags": ["solana", "pump.fun", "analysis", "risk", "trading", "x402", "mcp", "data"],
+      "path": "skills/pumpdata"
     }
   ]
 }
