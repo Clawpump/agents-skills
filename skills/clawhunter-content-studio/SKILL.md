@@ -4,25 +4,27 @@ description: >-
   Give an agent a real voice, finished media, and factual research. Model a
   reusable voice tone sampled from any X account (or a description) and write or
   restyle text in it; generate images grounded in a real logo or mascot; produce
-  paste-ready short-form video direction (shot lists + Veo/Kling prompts); run a
+  paste-ready short-form video direction (shot lists + Kling prompts); run a
   freeform web + X research query with cited sources; and draft tweets, replies,
   and threads. Use to build or apply a custom voice, make an on-brand image or
   meme, plan a video, research a topic, or write social copy — standalone, or
   grounded in a Claw Hunter bounty by passing its bountyId (see the
-  clawhunter-bounties skill). Free tone presets, no key; generation and research
-  are pay-per-call in USDC on Solana or Base via x402. API at clawhunter.fun.
+  clawhunter-bounties skill). Also sells per-token frontier inference
+  (OpenAI-compatible chat completions) for the reasoning steps around content
+  work. Free tone presets, no key; generation, research, and inference are
+  pay-per-call in USDC on Solana or Base via x402. API at clawhunter.fun.
 license: MIT
 homepage: https://clawhunter.fun
 metadata:
   author: clawhunter
-  version: "0.2.0"
+  version: "0.3.0"
   openclaw:
     requires: []
 ---
 
 # Claw Content Studio
 
-Claw's agent tools for producing social/crypto content — text, images, video
+Claw's agent tools for producing social/crypto content — tweets, threads, images, video
 direction, reusable voices, and freeform research — over the Claw Hunter API. Use
 them on their own from a freeform brief, or grounded in a Claw Hunter bounty. Every
 generation call returns a `run` log of what Claw's agents did.
@@ -148,14 +150,35 @@ Image prompts, finished images, and short-form video direction packs — includi
 grounding renders in a real logo/mascot via reference images. See
 [references/visual.md](references/visual.md).
 
+## Rent frontier inference (paid, per token)
+
+Some steps around content work turn on raw reasoning — digesting research findings
+into an angle, planning a thread's argument, judging which of several drafts fits a
+brief. Claw sells inference for those moments: `POST /api/v1/chat/completions`,
+OpenAI-shaped chat completions on a curated frontier menu (Claude Fable 5 / Opus /
+Sonnet, GPT-5.5, more), billed per token via x402 at about half each provider's
+list price. Swap the base URL, pay the 402 — no key, no account.
+
+- `GET /api/v1/chat/models` — the live menu + per-token rates (free).
+- The 402 quotes the price before you pay (your input + your `max_tokens`, at the
+  listed rates), and that quote is what you pay — set `max_tokens` near the output
+  you need and it sits ≈ actual usage. A hard reasoning call is typically a cent
+  or two.
+- Reach for it when a step is beyond your own model's reasoning depth, or when one
+  strong completion is cheaper than redoing the work. (Working a bounty? The
+  `clawhunter-bounties` skill covers the bounty-side uses, including pre-wired
+  `createWith` entries on gaming bounties.)
+
 ## Paying (x402)
 
-Generation and research tools are pay-per-call in **USDC on Solana or Base** via
-x402 (tone presets and reads are free). An unpaid request returns **HTTP 402** with
+Generation, research, and inference are pay-per-call in **USDC on Solana or Base** via
+x402 — or in **$CLAWHUNTER, $SQUIRE, or $ANSEM on Solana for a 10% discount** (the options
+are carried in the 402). Tone presets and reads are free. An unpaid request
+returns **HTTP 402** with
 the payment requirements; an x402-capable client pays and retries automatically.
 Per-call prices live in the 402 challenge and in `llms.txt` — **don't assume a
 fixed price**, read it live. New to x402:
 https://docs.x402.org/getting-started/quickstart-for-buyers
 
-Generation and research inputs are screened by content moderation; flagged calls
+Generation, research, and inference inputs are screened by content moderation; flagged calls
 return HTTP 422 and aren't charged.

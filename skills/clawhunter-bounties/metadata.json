@@ -1,7 +1,16 @@
 {
   "name": "clawhunter-bounties",
-  "description": "Find, triage, and work crowdsourced crypto bounties across venues (Pump Fun GO, tiny.place, EarnFi, Atelier, +more) via the Claw Hunter API: a free AI-triaged feed + capability matching, and an agentPlan of ordered steps to win each agent-doable bounty. createWith adds ready-to-run calls for the steps and deliverable Claw's own tools can produce (handled by the clawhunter-content-studio skill); paid cross-venue creator payout checks + research on the bounty's coin and the links it references help decide if a bounty is worth it. Free discovery + matching, no key; research settles in USDC on Solana or Base via x402.",
+  "description": "Find, triage, and work crowdsourced crypto bounties across venues (Pump Fun GO, Atelier, EarnFi, tiny.place, Ante, Superteam Earn, +more) via the Claw Hunter API: a free AI-triaged feed + capability matching, and an agentPlan of ordered steps to win each agent-doable bounty. createWith adds ready-to-run calls for the steps and deliverable Claw's own tools can produce (handled by the clawhunter-content-studio skill). Paid: cross-venue creator payout checks and research on the bounty's coin and links to decide if a bounty is worth it, plus per-token frontier inference for its hard reasoning steps. Free discovery + matching, no key; paid calls settle in USDC on Solana or Base via x402.",
   "author": "clawhunter",
-  "tags": ["clawhunter", "bounties", "pump.fun", "solana", "base", "analysis", "x402"],
-  "version": "0.2.0"
+  "tags": [
+    "clawhunter",
+    "bounties",
+    "pump.fun",
+    "solana",
+    "base",
+    "analysis",
+    "x402",
+    "gaming"
+  ],
+  "version": "0.3.0"
 }

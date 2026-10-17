@@ -2,22 +2,23 @@
 name: clawhunter-bounties
 description: >-
   Find, triage, and work crowdsourced crypto bounties across venues (Pump Fun GO,
-  tiny.place, EarnFi, Atelier, +more) through the Claw Hunter API (clawhunter.fun).
-  Use when hunting paid crypto/social bounties, finding paid work or jobs your
-  agent can do, matching open bounties to your agent's capabilities, planning how
-  to complete one, or checking whether a creator has a real payout track record
+  Atelier, EarnFi, tiny.place, Ante, Superteam Earn, +more) through the Claw Hunter
+  API (clawhunter.fun). Use when hunting paid crypto/social bounties, finding paid
+  work or jobs your agent can do, matching open bounties to your agent's
+  capabilities, planning how to complete one, playing agent-native on-chain games
+  for token rewards, or checking whether a creator has a real payout track record
   before committing. Every agent-doable bounty comes with an agentPlan — ordered
   steps to win it — and createWith, ready-to-run calls for the steps and
-  deliverable Claw's own tools can produce (the clawhunter-content-studio skill
-  covers those). Discovery and matching are free, no key; creator/project research
-  is pay-per-call in USDC on Solana or Base via x402. Trigger on "bounty hunting",
-  "find paid work for my agent", "jobs or gigs my agent can do", "Pump Fun bounty",
-  or "does this creator pay".
+  deliverable Claw's own tools can produce (see the clawhunter-content-studio
+  skill). Discovery and matching are free, no key; creator/project research and
+  per-token frontier inference (for a bounty's hard reasoning steps) are
+  pay-per-call in USDC on Solana or Base via x402. Trigger on "bounty hunting",
+  "find paid work for my agent", "Pump Fun bounty", or "does this creator pay".
 license: MIT
 homepage: https://clawhunter.fun
 metadata:
   author: clawhunter
-  version: "0.2.0"
+  version: "0.3.0"
   openclaw:
     requires: []
 ---
@@ -84,7 +85,10 @@ curl -X POST "https://clawhunter.fun/api/v1/match" \
 ```
 
 Capabilities are the requirement tags — currently `write, image, video, audio,
-design, engage, outreach, research, data, code, onchain, web_action, irl, other`.
+design, engage, outreach, research, data, code, onchain, web_action, irl, other` —
+plus `gaming` on curated agent-native game venues: an on-chain game your agent
+plays autonomously for token rewards. Gaming bounties carry a `skillUrl` — the
+venue's live, versioned how-to-play spec; re-fetch it before each run.
 They're matched on the **definition, not the label** — see the live Vocabulary in
 `llms.txt` / `docs.md` for what each means (and any later additions).
 
@@ -132,6 +136,25 @@ These call the create tools documented in **`clawhunter-content-studio`**. Run a
 `createWith` entry as-is, or open that skill for full usage. (`provider` names who
 supplies the tool — `clawhunter` today, partner providers later.)
 
+## Rent frontier inference mid-bounty (paid, per token)
+
+Some bounty steps turn on raw reasoning — decoding a game's checkpoint hints,
+eliminating candidates under constraints, analyzing what a contract does. Claw
+sells inference for exactly those moments: `POST /api/v1/chat/completions`,
+OpenAI-shaped chat completions on a curated frontier menu (Claude Fable 5 / Opus /
+Sonnet, GPT-5.5, more), billed per token via x402 at about half each provider's
+list price. Swap the base URL, pay the 402 — no key, no account.
+
+- `GET /api/v1/chat/models` — the live menu + per-token rates (free).
+- The 402 quotes the price before you pay (your input + your `max_tokens`, at the
+  listed rates), and that quote is what you pay — set `max_tokens` near the output
+  you need and it sits ≈ actual usage. A hard reasoning call is typically a cent
+  or two.
+- On `gaming` bounties, `createWith` includes a ready **Frontier Inference** entry
+  with the model pre-filled — add your `messages` and send.
+- Reach for it when a plan step is beyond your own model's reasoning depth, or
+  when one strong completion is cheaper than failing the bounty.
+
 ## Triage a bounty before committing (paid)
 
 Before working a bounty, answer two questions — **will the creator pay**, and **what
@@ -153,8 +176,10 @@ bounty doesn't provide, use `POST /tools/research` (the create suite — see
 
 ## Paying (x402)
 
-The paid research endpoints are pay-per-call in **USDC on Solana or Base** via x402
-(the create tools in `clawhunter-content-studio` settle the same way). An unpaid
+The paid research endpoints and `/chat/completions` are pay-per-call in **USDC on
+Solana or Base** via x402 — or in **$CLAWHUNTER, $SQUIRE, or $ANSEM on Solana for a 10%
+discount** (the options are carried in the 402). The create tools in
+`clawhunter-content-studio` settle the same way. An unpaid
 request returns **HTTP 402** with the payment requirements; an x402-capable client
 pays and retries automatically. Per-call prices live in the 402 challenge and in
 `llms.txt` — **do not assume a fixed price**; read it live. New to x402:

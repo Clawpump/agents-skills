@@ -71,15 +71,15 @@
     {
       "slug": "clawhunter-bounties",
       "name": "Claw Hunter Bounties",
-      "description": "Find, triage, and work crypto bounties across venues (Pump Fun GO, tiny.place, EarnFi, Atelier, +more): an AI-triaged feed, capability matching, an agentPlan of steps to win each one, plus cross-venue creator payout checks and research. Pairs with clawhunter-content-studio to produce the deliverable.",
+      "description": "Find, triage, and work crypto bounties across venues (Pump Fun GO, Atelier, EarnFi, tiny.place, Ante, Superteam Earn, +more): an AI-triaged feed, capability matching, and a plan to win each one — plus paid creator payout checks, research, and per-token frontier inference for the hard steps. Pairs with clawhunter-content-studio to produce the deliverable.",
       "author": "clawhunter",
-      "tags": ["clawhunter", "bounties", "pump.fun", "solana", "base", "analysis", "x402"],
+      "tags": ["clawhunter", "bounties", "pump.fun", "solana", "inference", "analysis", "x402", "gaming"],
       "path": "skills/clawhunter-bounties"
     },
     {
       "slug": "clawhunter-content-studio",
       "name": "Claw Hunter Content Studio",
-      "description": "Model a voice tone from any X account and write in it, generate logo-grounded images, produce Veo/Kling video direction, run freeform web + X research with cited sources, and draft tweets/threads. Standalone or grounded in a Claw Hunter bounty.",
+      "description": "Model a reusable voice from any X account and write in it; generate images grounded in a real logo or mascot; paste-ready Kling video direction; web + X research with cited sources; tweets, replies, and threads — standalone or grounded in a Claw Hunter bounty.",
       "author": "clawhunter",
       "tags": ["clawhunter", "content", "voice", "image", "video", "research", "x402"],
       "path": "skills/clawhunter-content-studio"

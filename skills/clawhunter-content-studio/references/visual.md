@@ -22,8 +22,8 @@ curl -X POST "https://clawhunter.fun/api/v1/tools/image-prompts" \
 ## POST /api/v1/tools/image — finished images
 
 Renders hosted images. Body adds `prompt` (exact render, skips prompt‑writing),
-`referenceImageUrls`, `count` (1–4), `quality` (`low|medium|high`), `size`
-(`1024x1024|1536x1024|1024x1536`). Returns `{ images: [{ url, prompt }], run }`.
+`referenceImageUrls`, `count` (1–4), `size` (`1024x1024|1536x1024|1024x1536`).
+Returns `{ images: [{ url, prompt }], run }`.
 
 ```sh
 curl -X POST "https://clawhunter.fun/api/v1/tools/image" \
@@ -34,7 +34,7 @@ curl -X POST "https://clawhunter.fun/api/v1/tools/image" \
 ## POST /api/v1/tools/video-director — shootable direction pack
 
 A treatment, a timed shot list (framing, camera, lighting, audio, dialogue), and
-per‑shot prompts formatted for **Veo** and **Kling** — paste‑ready for your video
+per‑shot prompts formatted for **Kling** — paste‑ready for your video
 tool. Body adds `platform`, `durationSec` (5–60, default 20), `storyboard` (render
 stills for the first shots), `referenceImageUrls`. Returns
 `{ treatment, audioNotes, shots[], storyboard[], run }`.
