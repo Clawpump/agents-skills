@@ -1,0 +1,16 @@
+{
+  "name": "pumpdata base rates",
+  "description": "Before an alpha call or a buy: how often pump.fun coins like this one actually paid, what its buyers have been, the deployer's record, and an honest replay, from every PumpSwap trade ever. Paid per call in USDC over x402, no key, no account.",
+  "author": "pumpdatafun",
+  "tags": [
+    "solana",
+    "pump.fun",
+    "analysis",
+    "risk",
+    "trading",
+    "x402",
+    "mcp",
+    "data"
+  ],
+  "version": "1.0.0"
+}
