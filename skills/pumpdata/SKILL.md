@@ -39,11 +39,19 @@ per call in USDC over x402 with your own wallet, from half a cent. Nothing here 
   oldest first, each with its deployer's record before it (launches, graduations, gap since the last) and the
   first-10-second bundle; launches newer than the hourly fill come within the minute (`source: "live"`, bundle not yet
   read). Poll it with `t = next_since` and keep each mint once; then call `/launch` or `/deployer` only for the coins
-  you are considering. A whole UTC day (today and the two before): `GET /launches/{YYYY-MM-DD}.json`.
+  you are considering. `min_launches=20` keeps the serial deployers' launches; `deployer=<wallet>` one deployer's. A whole
+  UTC day (today and the two before): `GET /launches/{YYYY-MM-DD}.json`.
 - `GET https://pumpdata.fun/graduations/{YYYY-MM-DD}.json` (today and the two UTC days before): every coin whose bonding
   curve completed that day, with `graduated_after_s` (seconds from its create), `same_second` (the whole curve bought
   within a second of launch, before anyone could see the coin: about a third of graduations), the deployer's launches
   and graduations before it, and the day's top graduating deployers.
+- `GET https://pumpdata.fun/graduations/since.json?since=<unix seconds>` (or the MCP tool `graduations`): every coin
+  whose curve completed in the last hour, as it lands, with `graduated_after_s` and `same_second`; poll with `next_since`.
+- `GET https://pumpdata.fun/trades/large.json?since=&min_usd=2500&side=&wallet=` (or the MCP tool `whale_trades`): every
+  pump.fun buy and sell of $2,500 or more (from $1,000) in the last hour, with the wallet, the coin, SOL, USD and the market
+  cap at the trade; `wallet=` for one wallet's. A record of what wallets did, not a signal. The page: /whales.
+- `GET https://pumpdata.fun/public/baserate.json` (or the MCP tool `odds_by_market_cap`): yesterday's odds for every
+  market-cap band, how many coins crossed it and what share did 2x, 5x, 10x, 20x within three hours. Pages: /pump-fun-odds.
 - `GET https://pumpdata.fun/coin?q=<ticker or name>`: which coins a ticker means, newest first, each with its deployer.
 - `GET https://pumpdata.fun/ticker/{symbol}.json` (or the MCP tool `ticker_crowd`): the crowd a new coin stands in.
   The ticker's launches over the last three UTC days (each day's first, and the ones that graduated with how long after
@@ -110,7 +118,7 @@ and the `PAYMENT-REQUIRED` header. Sign the transfer with your wallet and retry 
 answer comes back with the receipt in `PAYMENT-RESPONSE`. Your x402 tool does the retry for you. No key, no account.
 
 **MCP:** the same calls as tools at `POST https://pumpdata.fun/mcp` (Streamable HTTP, JSON-RPC 2.0):
-`stats`, `find_coin`, `check_coin`, `top_wallets`, `launches_since`, `ticker_crowd`, `trending` (free), and `base_rate`, `wallet_records`, `launch_record`,
+`stats`, `find_coin`, `check_coin`, `top_wallets`, `launches_since`, `ticker_crowd`, `trending`, `whale_trades`, `graduations`, `odds_by_market_cap` (free), and `base_rate`, `wallet_records`, `launch_record`,
 `deployer_record`, `similar_launches`, `replay`, `replay_result`. A paid tool called without `payment` or an `x-api-key` returns
 the offer; call again with the `PAYMENT-SIGNATURE` value as `payment`.
 
