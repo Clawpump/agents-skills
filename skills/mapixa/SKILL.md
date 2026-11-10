@@ -1,7 +1,7 @@
 ---
 name: mapixa
 description: "Read Mapixa's public Solana memecoin desk over MCP: the desk's grade (A, B, C or NO) with the written rule texts behind it, a coin card by mint with on-chain facts, the day's counts and the market's volume reading, every number with its age. Facts by written rules, not advice."
-version: 1.0.0
+version: 1.1.0
 author: MaxOpsLabs
 license: MIT
 homepage: https://mapixa.gg/agents/
@@ -11,8 +11,8 @@ prerequisites:
   commands: [curl]
 required_environment_variables:
   - name: MAPIXA_TOKEN
-    optional: false
-    prompt: "Mapixa read-only token (app.mapixa.gg → Settings → MCP / connectors)"
+    optional: true
+    prompt: "Mapixa read-only token (optional: the five read tools also answer without one; app.mapixa.gg → Settings → MCP / connectors)"
     help: "https://mapixa.gg/agents/"
 metadata:
   hermes:
@@ -48,15 +48,19 @@ report what the desk measured and how old the reading is. The user's own rules d
 - A tool error (`isError: true`) says what was wrong. Fix the argument and call once more; never loop.
 - Use only the five tools below. The server also lists tools for an account's own paper book; this skill does not
   call them.
-- The token is a secret: keep it in the agent's secret store (for example `MAPIXA_TOKEN`), never print it, never
-  paste it into a chat or a post.
+- The token is optional for the five tools below. When you have one, it is a secret: keep it in the agent's secret
+  store (for example `MAPIXA_TOKEN`), never print it, never paste it into a chat or a post.
 
 ## Connect
 
 - Server: `https://app.mapixa.gg/mcp`, MCP over Streamable HTTP. `POST` one JSON-RPC message (or a batch of 1 to 20);
   the answer is `application/json`. There is no SSE stream (a `GET` with a token answers 405) and no session to keep: a
   `tools/call` works without `initialize`. Protocol versions: 2025-11-25, 2025-06-18, 2025-03-26, 2024-11-05.
-- Every request needs `Authorization: Bearer <token>`. Without one the server answers 401 and a
+- Without a token: the five read tools answer anonymously, at most 5,000 calls a UTC day per address.
+  `tools/list` (the five tools only), `ping` and `tools/call` of the five work without an `Authorization` header and
+  without `initialize`, one `tools/call` per request. Past a limit the answer is HTTP 429 with `Retry-After`; a free
+  personal token counts per account instead (the limits below) and opens your own paper book. `initialize` and every
+  other tool and method need `Authorization: Bearer <token>`: without one the server answers 401 and a
   `WWW-Authenticate` header that points an OAuth client to its metadata.
 - A token, one of two ways:
   1. Personal token: sign in at https://app.mapixa.gg (the account is free), open Settings → MCP / connectors,
@@ -85,7 +89,16 @@ checks; `null` means unknown. `names_n` counts the names (callers) the desk saw 
 
 ## Example
 
-Check the connection first (the same line as on https://mapixa.gg/agents/):
+Check the connection first, without a token (the same line as on https://mapixa.gg/agents/):
+
+```sh
+curl -s https://app.mapixa.gg/mcp \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"mapixa_health","arguments":{}}}'
+```
+
+With a token, the same call:
 
 ```sh
 curl -s https://app.mapixa.gg/mcp \
@@ -95,11 +108,10 @@ curl -s https://app.mapixa.gg/mcp \
   -d '{"jsonrpc":"2.0","id":1,"method":"tools/call","params":{"name":"mapixa_health","arguments":{}}}'
 ```
 
-Then a coin card by mint:
+Then a coin card by mint (add the `Authorization` line only when `MAPIXA_TOKEN` is set: an empty Bearer is a 401):
 
 ```sh
 curl -s https://app.mapixa.gg/mcp \
-  -H "Authorization: Bearer $MAPIXA_TOKEN" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json, text/event-stream" \
   -d '{"jsonrpc":"2.0","id":2,"method":"tools/call","params":{"name":"mapixa_coin","arguments":{"mint":"2HhH7LwfNHrxqMrSoXZ6Ri7GdmRYSJ4e8qSra9Krpump"}}}'

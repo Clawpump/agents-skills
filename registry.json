@@ -111,7 +111,7 @@
     {
       "slug": "mapixa",
       "name": "Mapixa",
-      "description": "Read Mapixa's public Solana memecoin desk over MCP: grades A, B, C or NO with their written rule texts, coin cards by mint, the day's counts, every number with its age; facts by written rules, not advice",
+      "description": "Read Mapixa's public Solana memecoin desk over MCP, with or without a token: grades A, B, C or NO with their written rule texts, coin cards by mint, the day's counts, every number with its age; facts by written rules, not advice",
       "author": "MaxOpsLabs",
       "tags": ["analysis", "meme", "risk", "solana", "mcp"],
       "path": "skills/mapixa"
